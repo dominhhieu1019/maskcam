@@ -66,6 +66,12 @@ detector_output = config["debug"]["output_detector_resolution"]
 for k, image_filename in enumerate(images):
 
     frame = cv2.imread(image_filename)
+
+    # darken image
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    frame[...,2] = frame[...,2]*0.4
+    frame = cv2.cvtColor(frame, cv2.COLOR_HSV2BGR)
+
     if (
         detector_output
     ):  # Only for debugging purposes: use resized frame in video output
